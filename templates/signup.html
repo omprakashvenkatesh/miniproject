@@ -1,0 +1,123 @@
+
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <title>STUDIEN</title>
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/script.js' %}">
+ 
+    </script>
+    <style>
+        .input-field button{
+            text-align: center;
+            padding: 3px;
+            margin-left: 150px;
+        }
+        #mail{
+            width:115%
+        }
+        button{
+            border-radius: 10px;
+            padding: 7px;
+            color: white;
+            background-color:orange ;
+            margin-top: 5px;
+            border:1px solid black;
+        }
+        .om{
+            margin-left:80px;
+        }
+       
+    </style>
+
+
+
+</head>
+
+
+
+<body>
+    {% if error == "no" %}
+    <script>
+        alert('Signup successful')
+        window.location.href ="{% url 'login' %}"
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert('invalid data')
+        window.location.href ="{% url 'signup' %}"
+    </script>
+
+    {% endif %}
+
+
+
+   
+    <div class="Signup" id="signup"   >
+        <h1 class="heading" style="font-size:150%;">User Signup Form</h1>
+        <form method="post" onsubmit ="validateName()" action="">
+            {% csrf_token %}
+            <div class="input-group">
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" placeholder="Enter Name" id="fullname" name="name">
+                    <span id="name-error" style="color: red; visibility: hidden;">Invalid username</span>
+                    <span id="name-valid" style="color: green; visibility: hidden; text-align: center;">valid username</span>
+                    
+                </div>
+                <div class="email-verify">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Enter Email" name="emailid" id="mail">
+                    <span id="mail-err"></span>
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="text" placeholder="Enter contact" name="contact" id="num" >
+                    <span id="cont-error" style="color: red; visibility: hidden;">Enter Valid Number</span>
+                    <span id="cont-valid" style="color: green; visibility: hidden; text-align: center;">Valid number</span>
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Enter Password" name="password" id="pass1" >
+                    <span id="pass-error" style="color: red; visibility: hidden;">Password must be only 10 characters</span>
+                    <span id="pass-valid" style="color: green; visibility: hidden; text-align: center;">Valid password</span>
+                    
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-book"></i>
+                    <select name="branch">
+                        <option value="">--- Select Branch ---</option>
+                        <option value="IT">IT</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mech">Mechanical</option>
+                        <option value="Geo-informataics">Geo-informatics</option>
+                        <option value="EEE">EEE</option>
+                        <option value="ECE">ECE</option>
+                    </select>
+                    <span id="brr-err"></span>
+                </div>
+                
+                <input type="submit" class="btn btn-primary mt-sm-3" value="REGISTER">
+                <label>Already have an account! <a href="{% url 'login'%}">LOGIN</a></label>
+        </form>
+        
+        
+
+
+
+        
+    </div>
+
+
+</body>
+</html>
+ {% endblock %}
